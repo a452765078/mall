@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios';
 
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted() {
+    let url = "https://www.fastmock.site/mock/3ed5f621ab8a105fc4b195e8c98437dc/api/test"
+    axios.get(url).then((data) => {
+      console.log(data);
+    })
   }
 }
 </script>
