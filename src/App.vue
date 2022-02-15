@@ -6,7 +6,8 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import axios from 'axios';
+// import axios from 'axios';
+import jsonp from 'jsonp';
 
 export default {
   name: 'App',
@@ -15,8 +16,12 @@ export default {
   },
   mounted() {
     let url = "https://www.fastmock.site/mock/3ed5f621ab8a105fc4b195e8c98437dc/api/test"
-    axios.get(url).then((data) => {
-      console.log(data);
+    // axios.get(url).then((data) => {
+    //   console.log(data);
+    // })
+    jsonp(url,(err,data)=>{
+      let result = data;
+      console.log(result);
     })
   }
 }
