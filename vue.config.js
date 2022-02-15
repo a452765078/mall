@@ -1,9 +1,16 @@
 module.exports = {
     devServer: {
         host: 'localhost',
-        post: '8080',
+        port: '8080',
+        publicPath: "/",
         proxy: {
-            '/api': "https://www.imooc.com"
+            '/u': {
+                target: "https://www.imooc.com",
+                changeOrigin: true,
+                pathRwrite: {
+                    '/u': ''
+                }
+            }
         }
     }
 }
