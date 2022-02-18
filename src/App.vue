@@ -6,7 +6,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import axios from 'axios';
+// import axios from 'axios';
 // import jsonp from 'jsonp';
 
 export default {
@@ -16,10 +16,10 @@ export default {
   },
   mounted() {
     // let url = "https://www.fastmock.site/mock/3ed5f621ab8a105fc4b195e8c98437dc/api/test";
-    let url = "/u/index/allcourses"
-    axios.get(url).then((data) => {
-      console.log("接口调用",data);
-    })
+    // let url = "/u/index/allcourses"
+    // axios.get(url).then((data) => {
+    //   console.log("接口调用",data);
+    // })
     // jsonp(url,(err,data)=>{
     //   let result = data;
     //   console.log(result);

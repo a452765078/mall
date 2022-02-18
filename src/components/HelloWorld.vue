@@ -5,10 +5,20 @@
 </template>
 
 <script>
+// import storage from "../storage"
+import env from "../config/env.js"
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  mounted() {
+    // storage.setItem("user",{});
+    // storage.setItem("a",123123,'user');
+    // storage.setItem("a",123123);
+    // console.log(storage.getItem("user"))
+    // storage.clear('a');
+    console.log(env)
   }
 }
 </script>
