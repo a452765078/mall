@@ -6,19 +6,25 @@
 
 <script>
 // import storage from "../storage"
-import env from "../config/env.js"
+// import env from "../config/env.js"
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
   mounted() {
     // storage.setItem("user",{});
     // storage.setItem("a",123123,'user');
     // storage.setItem("a",123123);
     // console.log(storage.getItem("user"))
     // storage.clear('a');
-    console.log(env)
+    // console.log(env)
+    // this.axios.get('/api/mockjs').then((res)=>{
+    //   console.log(res);
+    // })
+    // this.axios.get("/test").then((res)=>{
+    //   console.log(res);
+    // })
+    // this.axios.get("/mock/user/login.json").then((res)=>{
+    //   console.log(res);
+    // })
   }
 }
 </script>

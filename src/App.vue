@@ -1,18 +1,20 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
+    <!-- <router-link to="/">根目录</router-link> -->
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 // import axios from 'axios';
 // import jsonp from 'jsonp';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+
   },
   mounted() {
     // let url = "https://www.fastmock.site/mock/3ed5f621ab8a105fc4b195e8c98437dc/api/test";
@@ -24,17 +26,22 @@ export default {
     //   let result = data;
     //   console.log(result);
     // })
+  console.log("this.$router =>",this.$router);
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  margin: 0;
+  padding: 0;
 }
+ul,li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+
 </style>

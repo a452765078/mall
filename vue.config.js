@@ -4,11 +4,11 @@ module.exports = {
         port: '8080',
         publicPath: "/",
         proxy: {
-            '/u': {
+            '/api': {
                 target: "https://www.imooc.com",
                 changeOrigin: true,
                 pathRwrite: {
-                    '/u': ''
+                    '/api': ''
                 }
             }
         }
