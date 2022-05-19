@@ -12,11 +12,18 @@
           </div>
           <div class="header-right">
               <ul class="flex-r">
-                  <li class="item">登录</li>
-                  <li class="item">注册</li>
+                  <li class="item">
+                      <a href="/#/login" v-if="username===''">登录</a>
+                  </li>
+                  <li class="item" v-if="username===''">
+                      <a href="/register">注册</a>
+                  </li>
+                  <li class="item" v-if="username!==''">
+                      <a href="#">{{username}}</a>
+                  </li>
                   <li class="cart">
                       <img src="../../resource/img/购物车.png">
-                      <span>购物车(0)</span>
+                      <span>购物车({{cartCount}})</span>
                   </li>
               </ul>
           </div>
@@ -27,11 +34,26 @@
 </template>
 
 <script>
+// import { mapState } from "vuex"
 
 export default {
   name: 'Header',
+  data() {
+      return {
+        //   username: this.$store.state.username,
+        //   cartCount: this.$store.state.cartCount
+      }
+  },
+  computed: {
+      username() {
+          return this.$store.state.username;
+      },
+      cartCount() {
+          return this.$store.state.cartCount;
+      }
+  },
   mounted() {
-
+      
   }
 }
 </script>
@@ -60,7 +82,11 @@ export default {
             .flex-r {
                 display: flex;
                 .item {
-                    margin-right: 19px
+                        a  {
+                        margin-right: 19px;
+                        font-size: 12px;
+                        color: #b0b0b0;
+                    }
                 }
                 .cart {
                     display: flex;

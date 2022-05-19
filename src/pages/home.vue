@@ -4,7 +4,7 @@
   <nav-vue></nav-vue>
   <menu-vue></menu-vue>
   <footer-vue></footer-vue>
-  <modal-vue :type="2">
+  <modal-vue :type="'2'">
     <template #header>
       <h1>标题</h1>
     </template>

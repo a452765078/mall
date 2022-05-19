@@ -159,7 +159,9 @@
         <div class="window">
             <swiper ref="mySwiper" :options="swiperOptions">
                 <swiper-slide v-for="item in slideList" :key="item.id">
-                    <a :href="item.id"><img class="sliderImg" :src="item.img" alt=""></a>
+                    <a :href="'/#/product/'+item.id">
+                        <img class="sliderImg" :src="item.img" alt="">
+                    </a>
                 </swiper-slide>
                 <!-- 分页器，也叫指示器，就是底部的小圆点 -->
                 <div class="swiper-pagination" slot="pagination"></div>
@@ -193,32 +195,55 @@
             <div class="right">
                 <ul>
                     <li v-for="product in productList" :key="product.id">
-                        <a href="javasript:;" class="product">
+                        <a href="javascript:;" class="product">
                             <p class="remark">{{product.remark}}</p>
                             <p class="img"><img :src="product.img" alt=""></p>
                             <p class="name">{{product.name}}</p>
                             <p class="detail">{{product.detail}}</p>
-                            <p class="price">{{product.price}}</p>
+                            <p class="price">{{product.price}}<span class="cart" @click="addCart(product.id)"></span></p>
                         </a>
                     </li>    
                 </ul>
             </div>
             <div class="back"></div>
         </div>
-
     </div>
-
+    <modal-vue :type="'2'" :showModal="showModal">
+        <template #header>
+            加入购物车
+        </template>
+        <template #body>
+            添加购物车成功！
+        </template>
+        <template #footer>
+            <div class="btn-wrap" @click="toCart">
+                <button-vue>
+                        <template #btn-content>确定</template>
+                </button-vue>
+            </div>
+            <div class="btn-wrap" @click="close">
+                <button-vue :isBgColorGray="true">
+                    <template #btn-content>取消</template>
+                </button-vue>
+            </div>
+                
+        </template>
+  </modal-vue>
 </div>
 </template>
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import 'swiper/css/swiper.css';
+import ModalVue from './Modal.vue';
+import ButtonVue from './Button.vue';
 export default {
   name: 'Menu',
   components: {
       Swiper,
-      SwiperSlide
+      SwiperSlide,
+      ModalVue,
+      ButtonVue
   },
   data() {
       return {
@@ -241,23 +266,23 @@ export default {
         },
         slideList: [
             {
-                id: '1',
+                id: '42',
                 img: '/imgs/slider/slide-1.jpg'
             },
             {
-                id: '2',
+                id: '45',
                 img: '/imgs/slider/slide-2.jpg'
             },
             {
-                id: '3',
+                id: '46',
                 img: '/imgs/slider/slide-3.jpg'
             },
             {
-                id: '4',
+                id: '47',
                 img: '/imgs/slider/slide-4.jpg'
             },
             {
-                id: '5',
+                id: '48',
                 img: '/imgs/slider/slide-5.jpg'
             },
             
@@ -290,7 +315,7 @@ export default {
         },
         productList:[
             {
-                id: '1',
+                id: '42',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -298,7 +323,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '2',
+                id: '43',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -306,7 +331,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '3',
+                id: '44',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -314,7 +339,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '4',
+                id: '45',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -322,7 +347,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '5',
+                id: '46',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -330,7 +355,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '6',
+                id: '47',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -338,7 +363,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '7',
+                id: '48',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
@@ -346,22 +371,44 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
             {
-                id: '8',
+                id: '49',
                 remark:'新品',
                 name: '小米9 6GB+128GB',
                 detail: '骁龙855，索尼4800万超广角微距',
                 price: '2999元',
                 img: '/imgs/item-box-3.jpg'
             },
-        ]
+        ],
+        showModal:true,
       }
   },
   mounted() {
-
+    //   console.log(this.slideList);
   },
   methods: {
       testClick() {
           console.log("testClick");
+      },
+      addCart(id) {
+          this.axios.post('/carts',{
+            productId:id,
+            selected: true
+          }).then((res=0)=>{
+                console.log(res);
+                if(res.cartTotalQuantity) {
+                    this.$store.dispatch('saveCartCount',res.cartTotalQuantity);
+                }
+                this.showModal = true;
+          }).catch((err)=>{
+              window.alert(err);
+          })
+      },
+      toCart() {
+          //TODO跳转购物车页面
+        // this.$router.push(`/detail/${this.productId}`);
+      },
+      close() {
+          this.showModal = false;
       }
   }
 }
@@ -374,7 +421,7 @@ export default {
         margin: 0 auto;
         width: 1226px;
         position: relative;
-            .nav {
+        .nav {
             position: absolute;
             top: 0;
             left: 0;
@@ -483,18 +530,22 @@ export default {
         }
         .ad {
             margin-top: 14px;
+            width: 1226px;
+            height: 167px;
             ul {
                 @include flex();
                 li {
                     margin-right: 14px;
-                }
-                .item {
+                }    
+                a {
+                    display: block;
+                    width: 296px;
+                    height: 167px;
                     img {
                         width: 296px;
                         height: 167px;
                     }
-                }
-                
+                }         
             }
         }
         .banner {
@@ -584,8 +635,9 @@ export default {
                             font-weight: bold;
                             color: #F20A0A;
                             margin-top: 16px;
-                            &::after {
-                                content: ' ';
+                            .cart {
+                                width: 20px;
+                                height: 20px;
                                 @include bgImg(20px,20px,'/imgs/icon-cart-hover.png');
                                 vertical-align: middle;
                             }
@@ -603,6 +655,12 @@ export default {
             }
         }
     }
+    .modal {
+            .footer {
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
 }
 
 </style>

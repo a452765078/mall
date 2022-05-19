@@ -26,7 +26,22 @@ export default {
     //   let result = data;
     //   console.log(result);
     // })
-  console.log("this.$router =>",this.$router);
+    // console.log("this.$router =>",this.$router);
+    this.getUser();
+    this.getCartCount();
+  },
+  methods: {
+    getUser() {
+      //res = {} 给个默认值，防止报错
+      this.axios.get('/user').then((res={})=>{
+        this.$store.dispatch('saveUserName',res.username);
+      })
+    },
+    getCartCount() {
+      this.axios.get('/carts/products/sum').then((res=0)=>{
+        this.$store.dispatch('saveCartCount',res);
+      })
+    }
   }
 }
 </script>
@@ -42,6 +57,26 @@ ul,li {
 a {
   text-decoration: none;
 }
-
+input {
+  border: none;
+  background: none;
+  outline: none;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix::after{
+  clear: both;
+  content: ' ';
+  display: table;
+}
+.container {
+  width: 1226px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 </style>

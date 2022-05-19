@@ -5,9 +5,9 @@ module.exports = {
         publicPath: "/",
         proxy: {
             '/api': {
-                target: "https://www.imooc.com",
+                target: "http://mall-pre.springboot.cn",
                 changeOrigin: true,
-                pathRwrite: {
+                pathRewrite: {
                     '/api': ''
                 }
             }

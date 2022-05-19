@@ -1,5 +1,5 @@
 <template>
-    <div class="modal">
+    <div class="modal" v-if="showModal">
         <div class="mask"></div>
         <div :class="['dialog',type===1?'':'mini']">
             <div class="header">
@@ -23,6 +23,10 @@ export default {
         }
     },
     props: {
+        showModal: {
+            type: Boolean,
+            default:false
+        },
         type:{
             type:String,
             default:'1'
@@ -37,6 +41,7 @@ export default {
 @import './../assets/scss/mixin.scss';
 
 .modal {
+    display: block;
     @include pos(fixed,0,0);
     z-index: 30;
     .mask {
@@ -74,4 +79,7 @@ export default {
         }
     }
 }
+// .showModal {
+//     display: block;
+// }
 </style>
