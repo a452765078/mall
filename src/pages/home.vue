@@ -4,7 +4,7 @@
   <nav-vue></nav-vue>
   <menu-vue></menu-vue>
   <footer-vue></footer-vue>
-  <modal-vue :type="'2'">
+  <!-- <modal-vue :type="'2'">
     <template #header>
       <h1>标题</h1>
     </template>
@@ -14,7 +14,7 @@
     <template #footer>
       <p><button>确定</button><button>取消</button></p>
     </template>
-  </modal-vue>
+  </modal-vue> -->
 </div>
 </template>
 
@@ -23,7 +23,7 @@ import HeaderVue from "../components/Header.vue";
 import NavVue from "../components/Nav.vue";
 import MenuVue from "../components/Menu.vue";
 import FooterVue from '../components/Footer.vue';
-import ModalVue from '../components/Modal.vue';
+// import ModalVue from '../components/Modal.vue';
 export default {
   name: 'Home',
   components:{
@@ -31,7 +31,7 @@ export default {
     NavVue,
     MenuVue,
     FooterVue,
-    ModalVue
+    // ModalVue
   },
   mounted() {
   }

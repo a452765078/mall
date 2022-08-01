@@ -1,6 +1,6 @@
 <template>
     <div class="btn">
-        <button class="btn-default" :class="[btnType,{'bag-color-gray':isBgColorGray}]">
+        <button class="btn-default" :class="[btnType,{'bag-color-gray':isBgColorGray},{'bag-color-white':isBgColorWhite}]">
             <slot name="btn-content"></slot>
         </button>
     </div>
@@ -25,11 +25,15 @@ export default {
         isBgColorGray: {
             type:Boolean,
             default: false
+        },
+        isBgColorWhite: {
+            type:Boolean,
+            default: false
         }
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .btn {
     .btn-default {
         text-align: center;
@@ -64,7 +68,10 @@ export default {
         }
         &.bag-color-gray {
             background: gray;
-        }  
+        } 
+        &.bag-color-white {
+            background: #FFFFFF;
+        }
     }    
 }
 

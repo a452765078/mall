@@ -21,6 +21,9 @@
                   <li class="item" v-if="username!==''">
                       <a href="#">{{username}}</a>
                   </li>
+                  <li class="item" v-if="username!==''">
+                    <a href="#" @click="exit">退出</a>
+                  </li>
                   <li class="cart">
                       <img src="../../resource/img/购物车.png">
                       <span>购物车({{cartCount}})</span>
@@ -53,12 +56,35 @@ export default {
       }
   },
   mounted() {
-      
+        this.getCartCount();
+    //   let params = this.$route.params;
+    //   console.log(params)
+    //   if( params && params.from == 'login') {
+    //         this.getCartCount();
+    //   }
+  },
+  methods: {
+      exit() {
+          this.axios.post('/user/logout').then(()=>{
+              alert("退出成功")
+          })
+          this.$store.dispatch("saveUserName",'');
+          this.$store.dispatch("saveCartCount",'0');
+          this.$cookie.set("userId",'',{expires:'session'});
+          this.$router.push("/login");
+      },
+      getCartCount() {
+          this.axios.get('/carts/products/sum').then((res)=>{
+            if(res) {
+                this.$store.dispatch('saveCartCount',res);
+            }
+          })
+      }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
     height: 39px;
     background: #333333;

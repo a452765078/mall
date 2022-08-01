@@ -5,6 +5,12 @@ import Login from '../pages/login.vue';
 import Product from '../pages/product.vue';
 import Detail from '../pages/detail.vue';
 import Cart from '../pages/cart.vue';
+import Order from '../pages/order.vue';
+import OrderConfirm from '../pages/orderConfirm.vue';
+import Test from '../pages/test.vue';
+import OrderDetail from '../pages/orderDetail.vue';
+import OrderList from '../pages/orderList.vue';
+import Alipay from '../pages/alipay.vue';
 
 Vue.use(VueRouter)
 
@@ -55,6 +61,35 @@ export default new VueRouter({
             path: '/cart',
             name: 'cart',
             component: Cart
+        }, {
+            path: '/order',
+            name: 'order',
+            component: Order,
+            children: [
+                {
+                    path: 'confirm',
+                    name: 'confirm',
+                    component: OrderConfirm
+                },
+                {
+                    path: 'detail',
+                    name: 'detail',
+                    component: OrderDetail
+                },
+                {
+                    path: 'alipay',
+                    name: 'alipay',
+                    component: Alipay
+                }, {
+                    path: 'list',
+                    name: 'list',
+                    component: OrderList
+                }
+            ]
+        }, {
+            path: '/test',
+            name: 'test',
+            component: Test
         }
     ]
 })

@@ -34,6 +34,7 @@ export default {
 <style lang="scss">
 .orderHeader {
     padding: 30px 0;
+    border-bottom: 1px solid #FF6600;
     .logo {
         display: inline-block;
         width: 52px;

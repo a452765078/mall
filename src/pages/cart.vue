@@ -174,7 +174,7 @@ export default {
         order() {
             let isChecked = this.cartProductVoList.some(item=>item.productSelected);
             if(isChecked) {
-                //todo
+                this.$router.push('/order/confirm')
             }else {
                 window.alert("需要选中一件商品");
             }

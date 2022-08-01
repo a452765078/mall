@@ -379,7 +379,7 @@ export default {
                 img: '/imgs/item-box-3.jpg'
             },
         ],
-        showModal:true,
+        showModal:false,
       }
   },
   mounted() {
@@ -394,7 +394,7 @@ export default {
             productId:id,
             selected: true
           }).then((res=0)=>{
-                console.log(res);
+                // console.log(res);
                 if(res.cartTotalQuantity) {
                     this.$store.dispatch('saveCartCount',res.cartTotalQuantity);
                 }

@@ -4,6 +4,8 @@ import axios from 'axios'
 import router from './router/index.js'
 import vueCookie from 'vue-cookie'
 import store from './store'
+import { Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 
 const mock = false;
 if (mock) {
@@ -27,14 +29,18 @@ axios.interceptors.response.use((config) => {
       window.location.href = '/#/login';
     }
   } else {
-    alert(res.msg)
+    Message.error(res.msg)
     return Promise.rejected(res);
   }
+}, (err) => {
+  Message.error(err);
+  return Promise.rejected(err);
 })
 
 
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
+Vue.prototype.$message = Message;
 Vue.use(vueCookie);
 
 new Vue({
